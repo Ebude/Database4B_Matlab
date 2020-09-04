@@ -1,0 +1,156 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Dealing with Database Challenge</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-04"><meta name="DC.source" content="DBC_mat.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Dealing with Database Challenge</h1><!--introduction--><p>Ebude Yolande</p><!--/introduction--><p>1. Import "GeneratorRefilling.sqlite" and "3057.dat" and change the header of "3057.dat" to ['num','name','surname','date']</p><p>SQLite</p><pre class="codeinput">conn=sqlite(<span class="string">'GeneratorRefilling.sqlite'</span>);
+query = <span class="string">"SELECT * FROM RefillingGen2018"</span>;
+data=fetch(conn,query);
+data=cell2table(data);
+data.Properties.VariableNames = [<span class="string">"Generator"</span>,<span class="string">"Buyer_Name"</span>,<span class="string">"Purchase_Quantity"</span>,<span class="string">"Purchase_Date"</span>,<span class="string">"Purchase_Time"</span>,<span class="string">"Payment"</span>,<span class="string">"Mass"</span>,<span class="string">"Generator_Amount"</span>,<span class="string">"Refilling_Name"</span>,<span class="string">"Refilling_Quantity"</span>,<span class="string">"Refilling_Date"</span>,<span class="string">"Refilling_Time"</span>, <span class="string">"Check"</span>];
+head(data,3);
+</pre><p>Dat file</p><pre class="codeinput">tab = datread();
+tab=tab(:,1:4); <span class="comment">% remove empty columns</span>
+tab.Properties.VariableNames = [{<span class="string">'num'</span>},{<span class="string">'name'</span>},{<span class="string">'surname'</span>},{<span class="string">'date'</span>}];
+head(tab,3);
+<span class="comment">% 2. Create a table in the database for "3057.dat" called Tab3057</span>
+query= <span class="string">'CREATE TABLE Tab3057 (num integer,name char(25),surname char(25),date date)'</span>;
+exec(conn, query);
+</pre><p>Add rows in new table</p><pre class="codeinput">insert(conn,<span class="string">'Tab3057'</span>,{<span class="string">'num'</span>,<span class="string">'name'</span>,<span class="string">'surname'</span>,<span class="string">'date'</span>},tab);
+<span class="comment">%Check values of table</span>
+query = <span class="string">"SELECT * FROM Tab3057"</span>;
+Tab3057=fetch(conn,query);
+Tab3057=cell2table(Tab3057);
+Tab3057.Properties.VariableNames = [{<span class="string">'num'</span>},{<span class="string">'name'</span>},{<span class="string">'surname'</span>},{<span class="string">'date'</span>}];
+head(Tab3057,3);
+</pre><p>3. Delete the "Tab3055" table</p><pre class="codeinput">query = <span class="string">"DROP TABLE Tab3055"</span>;
+exec(conn, query);
+</pre><p>4. Add a row to Tab3057 table</p><pre class="codeinput">query = <span class="string">"INSERT INTO Tab3057('num','name','surname','date') VALUES ('5','Peal','Johnny Walker','2014-01-23 17:47:55') "</span>;
+exec(conn, query);
+</pre><p>5. Delete a row of Tab3057</p><pre class="codeinput">query = <span class="string">"DELETE FROM Tab3057 WHERE num='5'"</span>;
+exec(conn, query);
+</pre><p>6. Add column 'verify' to Tab3057, assign 1 where num&gt;50 and 0 else</p><pre class="codeinput">query = <span class="string">"ALTER TABLE Tab3057 ADD verify Varchar(25)"</span>;
+exec(conn, query);
+<span class="comment">% Assign 1 to num&gt;50 and 0 else</span>
+query = <span class="string">"UPDATE Tab3057 SET verify='0'"</span>;
+exec(conn, query);
+query = <span class="string">"UPDATE Tab3057 SET verify='1' WHERE num&gt;50"</span>;
+exec(conn, query);
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Dealing with Database Challenge
+% Ebude Yolande
+%%
+% 1. Import "GeneratorRefilling.sqlite" and "3057.dat" and change the header of "3057.dat" to ['num','name','surname','date']
+%%
+% SQLite
+conn=sqlite('GeneratorRefilling.sqlite');
+query = "SELECT * FROM RefillingGen2018";
+data=fetch(conn,query);
+data=cell2table(data);
+data.Properties.VariableNames = ["Generator","Buyer_Name","Purchase_Quantity","Purchase_Date","Purchase_Time","Payment","Mass","Generator_Amount","Refilling_Name","Refilling_Quantity","Refilling_Date","Refilling_Time", "Check"]; 
+head(data,3);
+%%
+% Dat file
+tab = datread();
+tab=tab(:,1:4); % remove empty columns
+tab.Properties.VariableNames = [{'num'},{'name'},{'surname'},{'date'}];
+head(tab,3);
+% 2. Create a table in the database for "3057.dat" called Tab3057
+query= 'CREATE TABLE Tab3057 (num integer,name char(25),surname char(25),date date)';
+exec(conn, query);
+%%
+% Add rows in new table
+insert(conn,'Tab3057',{'num','name','surname','date'},tab);
+%Check values of table
+query = "SELECT * FROM Tab3057";
+Tab3057=fetch(conn,query);
+Tab3057=cell2table(Tab3057);
+Tab3057.Properties.VariableNames = [{'num'},{'name'},{'surname'},{'date'}];
+head(Tab3057,3);
+%%
+% 3. Delete the "Tab3055" table
+query = "DROP TABLE Tab3055";
+exec(conn, query);
+%%
+% 4. Add a row to Tab3057 table
+query = "INSERT INTO Tab3057('num','name','surname','date') VALUES ('5','Peal','Johnny Walker','2014-01-23 17:47:55') ";
+exec(conn, query);
+%%
+% 5. Delete a row of Tab3057
+query = "DELETE FROM Tab3057 WHERE num='5'";
+exec(conn, query);
+%%
+% 6. Add column 'verify' to Tab3057, assign 1 where num>50 and 0 else
+query = "ALTER TABLE Tab3057 ADD verify Varchar(25)";
+exec(conn, query);
+% Assign 1 to num>50 and 0 else
+query = "UPDATE Tab3057 SET verify='0'";
+exec(conn, query);
+query = "UPDATE Tab3057 SET verify='1' WHERE num>50";
+exec(conn, query);
+##### SOURCE END #####
+--></body></html>
